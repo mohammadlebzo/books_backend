@@ -8,10 +8,17 @@ const server = express();
 server.use(cors());
 const PORT = process.env.PORT;
 
-const getBookRouter = require('./Modules/book');
+server.use(express.json());
+
+const bookModule = require('./Modules/book');
+const addBookRouter = bookModule.addBookRouter;
+const getBookRouter = bookModule.getBookRouter;
+const deleteBookRouter = bookModule.deleteBookRouter
 
 server.get('/', homeRouter);
-server.get('/books',getBookRouter)
+server.get('/getbooks', getBookRouter);
+server.post('/books', addBookRouter);
+server.delete('/deletebook', deleteBookRouter);
 
 function homeRouter(req, res) {
     res.send('Server Active')

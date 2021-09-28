@@ -11,35 +11,18 @@ const bookSchema = new mongoose.Schema({
 
 const bookModel = mongoose.model('book', bookSchema);
 
-function seedBookInformation() {
-    const book1 = new bookModel({
-        title: 'title Book 1',
-        description: 'description Book 1',
-        status: 'status Book 1',
-        email: 'mohlebzo1@gmail.com'
-    })
-    const book2 = new bookModel({
-        title: 'title Book 2',
-        description: 'description Book 2',
-        status: 'status Book 2',
-        email: 'mohlebzo1@gmail.com'
-    })
-    const book3 = new bookModel({
-        title: 'title Book 3',
-        description: 'description Book 3',
-        status: 'status Book 3',
-        email: 'mohlebzo1@gmail.com'
-    })
-
-    book1.save();
-    book2.save();
-    book3.save();
-}
-
-seedBookInformation();
-
 // localhost:3001/books
-function getBookRouter(req,res){
+async function addBookRouter(req,res){
+    let { title, description, status, email } = req.body;
+    console.log(title, description, status, email);
+
+    await bookModel.create({
+        title,
+        description,
+        status,
+        email
+    })
+
     bookModel.find({},(error,data) => {
         if(error) {
             console.log('error in getting data',error);
@@ -50,4 +33,30 @@ function getBookRouter(req,res){
     })
 }
 
-module.exports = getBookRouter;
+function getBookRouter(req, res) {
+    bookModel.find({},(error,data) => {
+        if(error) {
+            console.log('error in getting data',error);
+        } else {
+            // console.log(data)
+            res.send(data);
+        }
+    })
+}
+
+function deleteBookRouter(req, res) {
+    let {bookID} = req.query;
+
+    bookModel.deleteOne({ _id: bookID }).then(() => {
+        bookModel.find({}, function (error, data) {
+            if (error) {
+                console.log('error in getting data', error)
+            } else {
+                // console.log(ownerData)
+                res.send(data)
+            }
+        })
+    })
+}
+
+module.exports = {addBookRouter, getBookRouter, deleteBookRouter};
