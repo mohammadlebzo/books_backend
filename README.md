@@ -1,7 +1,7 @@
 # Can of Books
 
-**Author**: Mohammad Lebzo
-**Version**: 1.0.1
+- **Author**: Mohammad Lebzo
+- **Version**: 1.0.2
 <!-- (increment the patch/fix version number if you make more commits past your first submission) -->
 
 ## Overview
@@ -19,7 +19,8 @@
 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
-- 27-09-2021 05:17pm - The server sends data from the database upon request.
+- **27-09-2021 05:17pm** - The server sends data from the database upon request.
+- **28-09-2021 07:37pm** - The server receives data from the front-end application and saves it in the database, also the front-end can now delete data from the database.
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
