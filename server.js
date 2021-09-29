@@ -13,12 +13,14 @@ server.use(express.json());
 const bookModule = require('./Modules/book');
 const addBookRouter = bookModule.addBookRouter;
 const getBookRouter = bookModule.getBookRouter;
-const deleteBookRouter = bookModule.deleteBookRouter
+const deleteBookRouter = bookModule.deleteBookRouter;
+const updateBookRouter = bookModule.updateBookRouter;
 
 server.get('/', homeRouter);
 server.get('/getbooks', getBookRouter);
 server.post('/books', addBookRouter);
 server.delete('/deletebook', deleteBookRouter);
+server.put('/updatebook', updateBookRouter);
 
 function homeRouter(req, res) {
     res.send('Server Active')

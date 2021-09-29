@@ -21,6 +21,7 @@
 
 - **27-09-2021 05:17pm** - The server sends data from the database upon request.
 - **28-09-2021 07:37pm** - The server receives data from the front-end application and saves it in the database, also the front-end can now delete data from the database.
+- **29-09-2021 02:03pm** - The server receives data from the front-end application and saves it in the database, also the front-end can now update data from the database.
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
