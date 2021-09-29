@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/booksData');
+mongoose.connect(process.env.MONGO_SERVER);
 
 const bookSchema = new mongoose.Schema({
     title: String,
@@ -33,6 +33,7 @@ async function addBookRouter(req,res){
     })
 }
 
+// localhost:3001/getbooks
 function getBookRouter(req, res) {
     bookModel.find({},(error,data) => {
         if(error) {
@@ -44,6 +45,7 @@ function getBookRouter(req, res) {
     })
 }
 
+// localhost:3001/deletebook
 function deleteBookRouter(req, res) {
     let {bookID} = req.query;
 
@@ -59,4 +61,21 @@ function deleteBookRouter(req, res) {
     })
 }
 
-module.exports = {addBookRouter, getBookRouter, deleteBookRouter};
+// localhost:3001/updatebook
+function updateBookRouter(req, res) {
+    let { title, description, status, email, _id } = req.body;
+    bookModel.findByIdAndUpdate(_id, { title, description, status }, (error, updatedData) => {
+        if (error) { console.log('error in updating') }
+        else {
+            bookModel.find({ email }, function (error, data) {
+                if (error) {
+                    console.log('error in getting data', error)
+                } else {
+                    res.send(data)
+                }
+            })
+        }
+    })
+}
+
+module.exports = {addBookRouter, getBookRouter, deleteBookRouter, updateBookRouter};
